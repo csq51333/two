@@ -124,3 +124,13 @@ function formatTime(n){
 	}
 	return "？？？"
 }
+
+function direct(url){
+	if(url){
+		sessionStorage.setItem('backUrl',window.location.href)
+		window.location = url
+	}else{
+		sessionStorage.setItem('backUrl',(window.location.href).match(/(?<=\w*\/)\w*(?=\.html)/))
+	}
+	return sessionStorage.getItem('backUrl');
+}

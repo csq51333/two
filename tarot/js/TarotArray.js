@@ -61,7 +61,28 @@ var Tarr = {
 			conte: "结果"
 		},
 		type: "全性质",
+		rated: 10,
 		total: 10
+	},
+	three:{
+		0:{
+			x:20,
+			y:25,
+			ag:-30
+		},
+		1:{
+			x:35,
+			y:10,
+			ag:0
+		},
+		2:{
+			x:50,
+			y:25,
+			ag:30
+		},
+		type:"全性质",
+		rated: 10,
+		total: 3
 	}
 
 }

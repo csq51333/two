@@ -107,6 +107,7 @@ var current = document.querySelector('.current')
 var markBox = document.querySelector('.remarks')
 var save = document.querySelector('.save')
 var mes = getParmas() // 信息
+var backUrl = sessionStorage.getItem('backUrl')
 
 var login = {
 	data:{},
@@ -175,7 +176,7 @@ var handle = (function(){
 			if(e.target.className == 'bei'){
 				var el = e.target.parentNode
 				var index = e.target.parentNode.parentNode.attributes.order.value // 牌阵序号->按序号翻牌
-				if(i == parseInt(index) && i < 10){
+				if(i == parseInt(index) && i < Tarr[mes.formation].rated){
 					var ag = getRoutate(el.style.transform,'Z')
 					var numbers = el.getAttribute('no.')
 					var zn = el.getAttribute('wei') == '正' ? 'z' : 'n';
@@ -185,10 +186,17 @@ var handle = (function(){
 					setTimeout(function(){
 						el.removeChild(e.target)
 					},300)
+				} else if(i >= Tarr[mes.formation].rated){
+					alert("打住， 无需再翻")
 				} else {
 					alert("弹框：提示打开顺序")
 				}
 				
+			} else if(e.target.className == 'biao'){
+				var el = e.target.parentNode
+				var numbers = el.getAttribute('no.')
+				var _url = 'detail.html?No='+numbers+"&kind="+mes.kind
+				direct(_url)
 			}
 		}
 })()
