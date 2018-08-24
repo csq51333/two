@@ -6,7 +6,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+/* eslint-disable no-new */ // 这里的注释是为了让单独new会报错的校验给跳过
 new Vue({
   el: '#app',
   router,
