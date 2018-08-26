@@ -112,15 +112,16 @@ function mask(obj){
 //转换时间戳格式
 function formatTime(n){
 	if(/\d{13,}/.test(n)){
-		var T = new Date()
-		var Year = T.getFullYear(n)
-		var Month = T.getMonth(n) + 1
-		var Dates = T.getDate(n)
-		var Hours = T.getHours(n)
-		var Minute = T.getMinutes(n)
-		var Second = T.getSeconds(n)
+		var timestamp = parseInt(n)
+		var T = new Date(timestamp)
+		var Year = T.getFullYear()
+		var Month = T.getMonth() + 1
+		var Dates = T.getDate()
+		var Hours = T.getHours()
+		var Minute = T.getMinutes()
+		var Second = T.getSeconds()
 
-		return Y+"."+Month+"."+Dates+" "+Hours+":"+Minute+":"+Second
+		return Year+"."+Month+"."+Dates+" "+Hours+":"+Minute+":"+Second+" "
 	}
 	return "？？？"
 }

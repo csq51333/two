@@ -126,6 +126,7 @@
 		</ul>
 	</div>
 </body>
+<script src="js/common.js"></script>
 <script src="js/TarotArray.js"></script>
 <script>
 var go = document.querySelector('.go')
@@ -147,29 +148,13 @@ for(x in Tarr){
 for(i in localStorage){
 	if(/Tarot/.test(i)){
 		var obj = JSON.parse(localStorage[i])
-		console.log(obj)
+		console.log(obj.date)
 		hist.innerHTML += '<li class="clearfix"><a href="src/TarotArray.html?'+ obj.record +'"><p class="problem ellipsis">'+ obj.remark +'</p><p class="recordDate ellipsis">'+formatTime(obj.date)+'</p></a></li>';
 	}
 }
 go.onclick = function(){
-	var str = "?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
-	window.location = 'src/tarot.html'+str
+	var _url = "src/tarot.html?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
+	direct(_url)
 }
-
-function formatTime(n){
-	if(/\d{13,}/.test(n)){
-		var T = new Date()
-		var Year = T.getFullYear(n)
-		var Month = T.getMonth(n) + 1
-		var Dates = T.getDate(n)
-		var Hours = T.getHours(n)
-		var Minute = T.getMinutes(n)
-		var Second = T.getSeconds(n)
-
-		return Year+"."+Month+"."+Dates+" "+Hours+":"+Minute+":"+Second+" "
-	}
-	return "？？？"
-}
-
 </script>
 </html>

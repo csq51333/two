@@ -116,6 +116,9 @@ var login = {
 		console.log(obj)
 		this.data = obj
 		this.create()
+		if(sessionStorage.getItem('backUrl') == "detail"){
+			fan_all()
+		}
 	},
 	create:function(){
 		var formation = this.data.formation
@@ -238,6 +241,19 @@ function isSave(checks){
 		}
 	}
 	return true
+}
+
+function fan_all(){
+	var pai = document.querySelectorAll('.pai')
+	if(pai.length > 0){
+		for(var i=0,len=pai.length;i<len;i++){
+			pai[i].querySelector(".biao").style.zIndex = "10";
+			pai[i].querySelector(".biao").style.transform = "rotateZ(" +angleZ(pai[i]) + "deg) rotateY(0deg)"
+			var zn = pai[i].getAttribute('wei') == '正' ? 'z' : 'n';
+			createMark(pai[i].getAttribute('no.'),i,mes.nature,zn)
+
+		}
+	}
 }
 </script>
 </html>

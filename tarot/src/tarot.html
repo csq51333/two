@@ -127,7 +127,8 @@ function collect(){
 }
 
 function redirect(){
-	window.location = '../src/TarotArray.html?data='+collect()+'&formation='+ mes.formation +'&nature='+ mes.nature +'&kind='+ mes.kind +'&Date='+ new Date().getTime() +'&query=' + '输入你的问题'
+	var _url = './TarotArray.html?data='+collect()+'&formation='+ mes.formation +'&nature='+ mes.nature +'&kind='+ mes.kind +'&Date='+ new Date().getTime() +'&query=' + '输入你的问题'
+	direct(_url)
 }
 
 var timer = null;
