@@ -29,8 +29,6 @@
 		}
 		#collect{
 			background-color: gray;
-			/*position: relative;
-			display: flex;*/
 		}
 		#collect > *{
 			width: 5rem;
@@ -64,11 +62,11 @@ var clt = document.getElementById('collect')
 var start = document.querySelector('.start')
 var items,lens;
 
-var mes = getParmas() // 第一页选项信息
+var mes = getParmas(); // 第一页选项信息
 
 //生成收集栏
-function createClt(){
-	lens = Tarr[mes.formation].total // 本页面中的10为，收集页传入的牌阵
+~function(){
+	lens = Tarr[mes.formation].total // 共收集多少张牌？后自动跳转
 	for(var i=0;i<lens;i++){
 		var div = document.createElement('div')
 		div.className = 'clt-item'
@@ -77,21 +75,18 @@ function createClt(){
 	start.style.top = redress + start.offsetHeight + "px"
 	start.style.left = redress + "px"
 	items = document.querySelectorAll('.clt-item');
-}
 
-createClt()
+	//摆盘。。。。
+	circle()
+}()
 
-//摆盘。。。。
-circle()
-
-//
 var handle = (function(){
 	var i = 0;
 	return function(e){
 		var el,et = e.target;
 		if((et.className == 'bei' || et.className == 'biao') && i < lens){
 			el = et.parentNode
-			if(el.getAttribute('wei')){ // wei是否含值可确定洗没洗过牌
+			if(canStart){ // canStart是否洗过牌
 				var v = el.getAttribute('wei') //正逆位
 				var n = el.getAttribute('no.') //牌号
 				items[i].setAttribute('wei',v);
@@ -134,6 +129,7 @@ function redirect(){
 var timer = null;
 var idx = 0;
 
+//长按开始，到达三秒后松开可触发，越长洗牌次数越多
 start.onmousedown = function(){
 	timer = setInterval(function(){
 		idx++
@@ -142,8 +138,8 @@ start.onmousedown = function(){
 }
 start.onmouseup = function(){
 	clearInterval(timer)
-	if(idx>2){
-		process(idx%2, mes.self)
+	if(idx>1){
+		process(idx-1, mes.self)
 		start.style.display = "none"
 	}else{
 		idx = 0;
@@ -159,10 +155,12 @@ start.onmouseup = function(){
 
 
 
-//index递增值，选满跳转/按钮跳转？，跳转前收集
+//index递增值，选满跳转/按钮跳转？，跳转前收集 ----核心的思路？
 
 
 
+
+//关于开发模式，暂时不想整了，没什么意义
 //点击牌翻转事件，兼容？
 document.addEventListener("dblclick",function(e){
 	var el

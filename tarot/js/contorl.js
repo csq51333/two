@@ -1,10 +1,11 @@
 var cw = document.body.clientWidth;//屏幕宽度，兼容不写
 var ch = document.body.clientHeight;//屏幕宽度，懒得管兼容
-var redress = cw > ch ? ch/3 : cw/2 //矫正值，为了居中
+var redress = cw > ch ? ch/3 : cw/3 //矫正值，为了居中
 
 var pArr = document.querySelectorAll('.pai');
 var len = pArr.length;
-var isSelfAg = 0; 
+var isSelfAg = 0;
+var canStart = false;
 
 //随机函数
 function rd(min,max){
@@ -79,7 +80,7 @@ function puK(){
 	var cha = 0;
 	for(var i=0;i<len;i++){
 		var T = ch/8 //将屏幕高度分成四份，决定每行上下间距
-		var f = (len*30/cw)+1 //以左右间距30铺开，得出能份成几行
+		var f = (len*30/cw) + .5 //以左右间距30铺开，得出能份成几行
 		var c = parseInt(len/f) //每一行有多少张？
 		pArr[i].style.top = parseInt(pArr[i].style.zIndex/c) * T + 'px';
 		pArr[i].style.left = (pArr[i].style.zIndex%c)*30 + 'px';
@@ -107,7 +108,7 @@ function Sqie(){
 
 	//操作地图
 	var map = {
-		top: [50,-50,50,-50,0],
+		top: [100,-100,100,-100,0],
 		run: ['fen','fen','he','he','zo'],
 		cun:[0]
 	}
@@ -194,5 +195,6 @@ function next(){
 
 	setTimeout(function(){
 		puK()
+		canStart = true;
 	},1000)
 }

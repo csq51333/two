@@ -139,11 +139,25 @@ var hist = document.querySelector('.hist')
 var colls = document.querySelector('.colls')
 
 var TarrNo = 0;
-for(x in Tarr){
-	TarrNo++;
-	var html = '<option value="'+x+'">'+x+'</option>'
-	zh.innerHTML += html
-}
+var selec = (function(){
+	var Arr = [];
+	for(x in Tarr){
+		Arr.push(Tarr[x])
+	}
+	return function(){
+		var _idx = ce.selectedIndex;
+		var _tex = ce.options[_idx].text;
+		var reg = RegExp("" + _tex)
+		var fArr = Arr.filter(function(item, index){
+			return reg.test(item.type)
+		})
+		zh.innerHTML = ""
+		fArr.forEach(function(item){
+			var html = '<option value="'+ item.English +'">'+item.Chinese+'</option>'
+			zh.innerHTML += html
+		})
+	}
+})()
 
 for(i in localStorage){
 	if(/Tarot/.test(i)){
@@ -156,5 +170,7 @@ go.onclick = function(){
 	var _url = "src/tarot.html?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
 	direct(_url)
 }
+window.onload = selec
+ce.onchange = selec
 </script>
 </html>

@@ -10,7 +10,6 @@
 			height: 5rem;
 			background-color: black;
 			color: white;
-			margin-bottom: 20px
 		}
 		.hearder:hover .remarks{
 			position: absolute;
@@ -24,7 +23,7 @@
 		.zhen{
 			width: 60%;
 			position: relative;
-			margin:20px auto;
+			margin:0px auto;
 		}
 		.box{
 			position: absolute;
@@ -66,23 +65,12 @@
 			/*white-space: wrap*/
 		}
 		.mark>p>span{color: red}
+		
 		.save{
-			width: 4rem;
-			height: 3rem;
-			line-height: 3rem;
-			background-color: black;
-			position: fixed;
-			text-align: center;
-			border-radius: .2rem;
-			border: 1px solid gray;
-			color: white;
-			right: 0;
-			top: 45%;
-			font-size: .5rem;
-			transition: .5s;
+			top: 18rem;
 		}
-		.save:hover{
-			width: 6rem;
+		.back{
+			top: 15rem;
 		}
 	</style>
 </head>
@@ -95,7 +83,8 @@
 		<div class="zhen"></div>
 	</div>
 
-	<div class="save">保存记录</div>
+	<div class="save side">保存记录</div>
+	<div class="back side">返回首页</div>
 </body>
 <script src="../js/truth.js"></script>
 <script src="../js/common.js"></script>
@@ -106,8 +95,10 @@ var cap = document.querySelectorAll('.caption')
 var current = document.querySelector('.current')
 var markBox = document.querySelector('.remarks')
 var save = document.querySelector('.save')
+var back = document.querySelector('.back')
 var mes = getParmas() // 信息
 var backUrl = sessionStorage.getItem('backUrl')
+var rated = Tarr[mes.formation].rated
 
 var login = {
 	data:{},
@@ -192,7 +183,16 @@ var handle = (function(){
 				} else if(i >= Tarr[mes.formation].rated){
 					alert("打住， 无需再翻")
 				} else {
-					alert("弹框：提示打开顺序")
+					mask({
+						title:"自己百度一下吧",
+						btn:"确认保存",
+						content:'img',
+						imgSrc:"../img/bg/a.jpg",
+						className:"alertImg",
+						callback:function(_mark){
+							console.log("保存消失整了吗？")
+						}
+					})
 				}
 				
 			} else if(e.target.className == 'biao'){
@@ -214,8 +214,10 @@ save.onclick = function(){
 	var _key = mes.Date
 	if(isSave(_key)){
 		mask({
-			title:"情在下方输入测试内容",
+			title:"请在下方输入测试内容",
 			btn:"确认保存",
+			content:'text',
+			className:"saveMark",
 			callback:function(_mark){
 				//可分为按时间查询new Date("2018.2.12 00:01").getTime()与按问题查询/??/.test(??)
 				var _value = window.location.search.substr(1)
@@ -233,6 +235,11 @@ save.onclick = function(){
 		alert('查询到已有ID，请勿重复保存')
 	}
 }
+
+back.onclick = function(){
+	direct('../index.html')
+}
+
 function isSave(checks){
 	var _check = 'Tarot'+checks;
 	for(x in localStorage){
@@ -243,17 +250,19 @@ function isSave(checks){
 	return true
 }
 
+// 当从详情页返回时所有牌自动打开
 function fan_all(){
 	var pai = document.querySelectorAll('.pai')
 	if(pai.length > 0){
-		for(var i=0,len=pai.length;i<len;i++){
+		for(var i=0,len = rated || pai.length;i<len;i++){
 			pai[i].querySelector(".biao").style.zIndex = "10";
-			pai[i].querySelector(".biao").style.transform = "rotateZ(" +angleZ(pai[i]) + "deg) rotateY(0deg)"
+			pai[i].style.transform = "rotateZ(" +angleZ(pai[i]) + "deg) rotateY(0deg)"
 			var zn = pai[i].getAttribute('wei') == '正' ? 'z' : 'n';
 			createMark(pai[i].getAttribute('no.'),i,mes.nature,zn)
 
 		}
 	}
 }
+
 </script>
 </html>

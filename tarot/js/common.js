@@ -32,6 +32,7 @@ function getRoutate(str,ag){
 	return angle;
 }
 
+//规整函数，要么竖着要么横
 function ZNWei(_ag,s){
 	if(typeof(_ag) == "number"){
 		var ag = _ag % 360
@@ -78,32 +79,48 @@ function createPai(father,i,wei,kinds){
 function mask(obj){
 	var arg = obj || {}
 	var cb = arg.callback
-	var curtain = document.querySelector('.curtain');
+	var po = document.querySelector('.popover');
+	var curtain = document.querySelector('.' + obj.className);
 	if(curtain){
 		curtain.style.display = 'block'
+		po.style.display = 'block'
 	} else {
+		if(!po){
+			var po =document.createElement('div')
+			po.className = 'popover'
+			document.body.appendChild(po)
+		}
 		var curtain = document.createElement('div')
 		var prompt = document.createElement('div')
-		curtain.className = "curtain"
+		curtain.className = "curtain " + obj.className
 		prompt.className = "prompt"
 
-		prompt.innerHTML = "<h3>"+ arg.title +"</h3><textarea class='_mark'></textarea><button class='btn'>"+ arg.btn +"</button>"
-
+		switch(obj.content){
+			case "text":
+				prompt.innerHTML = "<h3>"+ arg.title +"</h3><textarea class='_mark'></textarea><button class='btn'>"+ arg.btn +"</button>"
+				break;
+			case "img" :
+				prompt.innerHTML = "<h3>"+ arg.title +"</h3><img class='img_mark' src='"+obj.imgSrc+"' />"
+		}
+		
+		po.style.display = 'block'
 		curtain.appendChild(prompt)
-		document.body.appendChild(curtain)
+		po.appendChild(curtain)
 
 		curtain.addEventListener('click',function(e){
 			var e = e || window.e
-			if(e.target.className == 'curtain'){
+			if(e.target.className.indexOf(obj.className) != -1){
 				this.style.display = 'none'
+				po.style.display = 'none'
 			}
 		},true)
 
 		var btn = document.querySelector('.btn')
 		btn.addEventListener('click',function(){
-			var localMark = document.querySelector('.prompt').querySelector('._mark').value
+			var localMark = document.querySelector('.' + obj.className).querySelector('._mark').value
 			arg.callback(localMark)
 			curtain.style.display = 'none'
+			po.style.display = 'none'
 		})
 	}
 
