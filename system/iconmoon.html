@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iconmoon的使用</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.con:before{
+			content: "\e926"
+		}
+		li{
+			margin:20px 0 0 10px;
+		}
+		li:hover span{
+			color: red
+		}
+	</style>
+</head>
+<body>
+<span class="icon-thumb_up">-------></span>
+<span class="icon-thumb_down"></span>
+<span class="icon-home"></span>
+<span class="icon-film"></span>
+<span class="icon-file-text2"></span>
+<span class="icon-download"></span>
+<span class="icon-phone"></span>
+<span class="icon-shopping_cart"></span>
+<span class="icon-imageshome"></span>
+<span class="icon-camera"></span>
+<span class="icon-bubbles"></span>
+<span class="icon-users"></span>
+<span class="icon-user-plus"></span>
+<span class="icon-html-five"></span>
+<div class="icon-thumb_down"></div>
+<!-- <div class="con"></div>
+<span class="con"></span> -->
+<script>
+var arr = ["icon-thumb_up","icon-thumb_down","icon-home","icon-film","icon-file-text2","icon-download","icon-phone","icon-shopping_cart","icon-imageshome","icon-camera","icon-bubbles","icon-users","icon-user-plus","icon-html-five"]
+var ars = document.getElementsByTagName("span");
+[].forEach.call(ars,function(item){
+	var li = document.createElement("li")
+	var span = document.createElement("span")
+	span.className = item.className
+	li.innerHTML = item.className + " : "
+	li.appendChild(span)
+	document.body.appendChild(li)
+	console.log(item.className)
+})
+arr.forEach(function(item){
+	var li = document.createElement("li")
+	var span = document.createElement("span")
+	span.className = item
+	li.innerHTML = item + " : "
+	li.appendChild(span)
+	document.body.appendChild(li)
+	console.log(item.className)
+})
+</script>
+</body>
+</html>
