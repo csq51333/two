@@ -63,6 +63,10 @@
 			padding: 0 1rem;
 			margin: 10px 0;
 		}
+		.hist>li>a{
+			display: inline-block;
+			width: 94%;
+		}
 		.problem{
 			float: left;
 			width: 55%;
@@ -72,6 +76,14 @@
 			float: right;
 			text-align: right;
 		}
+		.detele{
+			float: right;
+			width: 5%;
+			height: 100%;
+			text-align: center;
+			cursor: default;
+		}
+		.detele:hover{color:cyan;}
 	</style>
 </head>
 <body>
@@ -162,8 +174,11 @@ var selec = (function(){
 for(i in localStorage){
 	if(/Tarot/.test(i)){
 		var obj = JSON.parse(localStorage[i])
-		console.log(obj.date)
-		hist.innerHTML += '<li class="clearfix"><a href="src/TarotArray.html?'+ obj.record +'"><p class="problem ellipsis">'+ obj.remark +'</p><p class="recordDate ellipsis">'+formatTime(obj.date)+'</p></a></li>';
+		console.log(obj)
+		var cache = hist.innerHTML;
+		hist.innerHTML = "";
+		hist.innerHTML += '<li class="clearfix"><a href="src/TarotArray.html?'+ obj.record +'"><p class="problem ellipsis">'+ obj.remark +'</p><p class="recordDate ellipsis">'+formatTime(obj.date)+'</p></a><span class="detele" data-Id="' + i + '"">x</span></li>';
+		hist.innerHTML += cache
 	}
 }
 go.onclick = function(){
@@ -172,5 +187,16 @@ go.onclick = function(){
 }
 window.onload = selec
 ce.onchange = selec
-</script>
-</html>
+function Del(){
+	console.log("1111111")
+	console.log(this)
+}
+document.addEventListener('click',function(e){
+	if(e.target.className == 'detele'){
+		if(confirm("确认删除？") == true){
+			localStorage.removeItem(e.target.dataset.id)
+			e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+		}
+	}
+})
+</script </html>

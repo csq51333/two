@@ -39,18 +39,18 @@ function circle(){
 }
 
 //洗牌函数
-function xiP(){
+function shuffle(){
 	for(var i = 0; i<len;i++){
 		var _redress = angleZ(pArr[i])
 		pArr[i].style.top = rd(-200,200) + redress + 'px';
 		pArr[i].style.left = rd(-200,200) + redress + 'px';
 		pArr[i].style.transform = 'rotateZ(' + (rd(0,360) + _redress) + 'deg)'
 	}
-	daL()
+	messUp()
 }
 
 //横向合牌,加任意参数是竖向合拍（其实由ZNWei函数决定）
-function heS(s){
+function fold(s){
 	for(var i = 0; i<len;i++){
 		pArr[i].style.top = redress + 'px';
 		pArr[i].style.left = redress + 'px';
@@ -62,7 +62,7 @@ function heS(s){
 }
 
 //打乱排序，嵌在洗牌函数里
-function daL(){
+function messUp(){
 	var zArr = []
 	for(var i=0;i<len;i++){
 		zArr.push(i);
@@ -74,7 +74,7 @@ function daL(){
 }
 
 //铺开函数
-function puK(){
+function unfold(){
 	//横向铺开以z-index为序列
 	var _w = document.body.clientWidth;
 	var cha = 0;
@@ -94,7 +94,7 @@ function puK(){
 }
 
 //切三叠牌，再也不要用递归这种蛋疼玩意儿来写了....
-function Sqie(){
+function cutCard(){
 	var i = arguments[0] || 0;  //记步数，这是第几次递归
 	var rand = arguments[1] || 0;  // 切三叠拍，每叠随机数
 	var cun = arguments[2] || null; // 存之前切好的：每叠的随机数
@@ -175,14 +175,14 @@ var process = function(n, _ag){
 	// document.getElementById('origin').style.animation = "circle "+i+"s linear"
 	for(var i=0;i<lens;i++){
 		setTimeout(function(){
-			xiP()
+			shuffle()
 		},i*1000)
 	}
 	setTimeout(function(){
-		heS()
+		fold()
 	},i*1000)
 	setTimeout(function(){
-		Sqie()
+		cutCard()
 	},++i*1000)
 }
 
@@ -194,7 +194,7 @@ function next(){
 	}
 
 	setTimeout(function(){
-		puK()
+		unfold()
 		canStart = true;
 	},1000)
 }

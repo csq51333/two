@@ -159,6 +159,7 @@ function createMark(idx,odr,type,zn){
 	markBox.appendChild(li)
 }
 
+//操作牌的核心处理函数
 var handle = (function(){
 	var i = 0;
 	var nature = mes.nature
@@ -184,10 +185,9 @@ var handle = (function(){
 					alert("打住， 无需再翻")
 				} else {
 					mask({
-						title:"自己百度一下吧",
-						btn:"确认保存",
+						title:"牌阵详情",
 						content:'img',
-						imgSrc:"../img/bg/a.jpg",
+						imgSrc:Tarr[mes.formation].array,
 						className:"alertImg",
 						callback:function(_mark){
 							console.log("保存消失整了吗？")

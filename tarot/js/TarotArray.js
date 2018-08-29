@@ -21,6 +21,7 @@ var Tarr = {
 		Chinese:"圣三角牌阵",
 		English:"three",
 		type:"综合测试工作学业健康生活人际财富",
+		array: "../img/card-array/three.jpg",
 		rated: 3,
 		total: 3
 	},
@@ -88,6 +89,7 @@ var Tarr = {
 		Chinese:"凯尔特十字牌阵",
 		English:"kerte",
 		type: "综合测试工作学业恋情婚姻健康生活人际财富",
+		array: "../img/card-array/kerte.jpg",
 		rated: 10,
 		total: 10
 	},
@@ -185,6 +187,7 @@ var Tarr = {
 		Chinese:"吉普赛爱情牌阵",
 		English:"Gypsy",
 		type:"恋情婚姻",
+		array: "../img/card-array/Gypsy.gif",
 		rated: 5,
 		total: 15
 	}
