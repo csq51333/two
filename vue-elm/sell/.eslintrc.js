@@ -27,6 +27,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // semi:['error', 'always'], // 尾部无分号就报错的配置，我不喜欢
     // 取消关于缩进的要求
-    'indent': 0
+    'indent': 0,
+    // 取消data() {}必须data () {}这种，报错点复制，来这里加0就能取消
+    'space-before-function-paren': 0
   }
 }

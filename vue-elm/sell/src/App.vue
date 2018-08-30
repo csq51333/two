@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Header></header>
+    <Header :seller="seller"></Header>
     <div class="tab border-1px">
       <div class="tab-item">
         <router-link to='/goods'>商品</router-link>
-      </div> 
+      </div>
       <div class="tab-item">
         <router-link to='/ratings'>评论</router-link>
       </div>
@@ -18,9 +18,24 @@
 
 <script>
 import Header from './components/header/header.vue'
+import datas from '../data.js'
+
 export default {
+  data() {
+    return {
+      seller: {}
+    }
+  },
   components: {
     Header
+  },
+  created() {
+    // this.$http.get('../data.json').then(response => {
+    //   console.log(response)
+    // }, response => {
+    //   console.log('error')
+    // })
+    this.seller = datas.seller
   }
 }
 </script>
