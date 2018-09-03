@@ -15,6 +15,13 @@
 		li:hover span{
 			color: red
 		}
+		.son{
+			width: 20px;
+			height: 20px;
+			float: left;
+			margin: 10px;
+			background-color: red;
+		}
 	</style>
 </head>
 <body>
@@ -35,7 +42,16 @@
 <div class="icon-thumb_down"></div>
 <!-- <div class="con"></div>
 <span class="con"></span> -->
+<div class="father">
+	<div class="son" onclick="num(1)"></div>
+	<div class="son" onclick="num(2)"></div>
+	<div class="son" onclick="num(3)"></div>
+	<div class="son" onclick="num(4)"></div>
+	<div class="son" onclick="num(5)"></div>
+</div>
+<div id="score"></div>
 <script>
+var score = document.getElementById('score')
 var arr = ["icon-thumb_up","icon-thumb_down","icon-home","icon-film","icon-file-text2","icon-download","icon-phone","icon-shopping_cart","icon-imageshome","icon-camera","icon-bubbles","icon-users","icon-user-plus","icon-html-five"]
 var ars = document.getElementsByTagName("span");
 [].forEach.call(ars,function(item){
@@ -56,6 +72,23 @@ arr.forEach(function(item){
 	document.body.appendChild(li)
 	console.log(item.className)
 })
+function axios(){
+	console.log("ajax")
+	return {
+		get: function(){
+			console.log(this)
+		}
+	}
+}
+axios.prototype.get = function(){
+	console.log(this)
+}
+
+// axios.get()????
+function num(n){
+	var str = "★★★★★☆☆☆☆☆".slice(5-n, 10-n)
+	score.innerHTML = str
+}
 </script>
 </body>
 </html>

@@ -49,8 +49,9 @@ export default {
 </script>
 
 <style lang="stylus">
-// @import "../../common/stylus/icon"
+@import "../../common/stylus/icon"
 @import "../../common/stylus/mixin"
+// @import "../../common/stylus/style.css"
 .header
   background-color #666
   .content-wrapper
