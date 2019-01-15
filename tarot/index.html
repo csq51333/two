@@ -192,6 +192,11 @@ ki.onchange = function(){
 	
 }
 go.onclick = function(){
+	mask({
+			title:"加载图中",
+			content:'load',
+			callback:function(){}
+		})
 	if(isCanGo){
 		var _url = "src/tarot.html?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
 		direct(_url)

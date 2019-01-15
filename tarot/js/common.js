@@ -101,6 +101,10 @@ function mask(obj){
 				break;
 			case "img" :
 				prompt.innerHTML = "<h3>"+ arg.title +"</h3><img class='img_mark' src='"+obj.imgSrc+"' />"
+				break;
+			case "load":
+				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3>"
+				break;
 		}
 		
 		po.style.display = 'block'
